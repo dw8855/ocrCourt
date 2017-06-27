@@ -8,7 +8,7 @@ import re
 import roughclassification
 
 
-def fineClassifyDocument(imageFile, fineDocumentNum):
+def fineClassifyDocument(imageFile):
     count = 0
     lineNum = 0
     image = numpy.array(imageFile)
@@ -450,8 +450,8 @@ def contentEndCheck(image, row, imageFile):  # 特殊文件的尾部识别
             if re.match(txt, '.*撤回.{0,3}执行.{0,4}'):
                 return '特定类型的文件尾 - 执行撤回'
         if lineNum > 5:
-            return ''
-    return ''
+            return '其它'
+    return '其它'
 
 
 def ocrAbbyy(imageFile):
@@ -525,8 +525,6 @@ def endCheck(image, row, imageFile):  # 文件尾部识别
     return False
 
 
-def ocrAbbyy(lineImage):
-    pass
 
 
 def wordsFilter(txt):
@@ -539,5 +537,5 @@ if __name__ == '__main__':
     imageName = os.listdir(filePath + '/' + file[0])
     imagePath = filePath + '/' + file[0] + '/' + imageName[0]
     imageFile = Image.open(imagePath)
-    fineDocumentNum = 0
-    deepClassifiedInformation, fineDocumentNum = fineClassifyDocument(imageFile, fineDocumentNum)
+    deepClassifiedInformation = fineClassifyDocument(imageFile)
+    print(deepClassifiedInformation)

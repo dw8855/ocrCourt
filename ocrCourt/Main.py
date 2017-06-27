@@ -1,12 +1,11 @@
-#-*- coding: UTF-8 -*-
+# -*- coding: UTF-8 -*-
 
-#import sys
+# import sys
 import os
 import getimage
 import roughclassification
 import fineclassifycertificate
 import fineclassifydocument
-
 
 
 #   User: duanwei
@@ -19,21 +18,26 @@ def Main(imagePath):
     fineCertificateNum = 0
     fineDocumentNum = 0
     imageFile = getimage.getImage(imagePath)
-#    imageFile = imagePretreatmentGuang(imageFile)
-#    imageFile = imagePretreatment(imageFile)
-#     classifiedInformation = roughclassification.roughClassification(imageFile)
+    #    imageFile = imagePretreatmentGuang(imageFile)
+    #    imageFile = imagePretreatment(imageFile)
+    #     classifiedInformation = roughclassification.roughClassification(imageFile)
     classifiedInformation = '文书'
-    if (classifiedInformation == '证件'):
-        deepClassifiedInformation = fineclassifycertificate.fineClassifyCertificate(imageFile, fineCertificateNum)
-        if deepClassifiedInformation;
-        fineCertificateNum = fineCertificateNum + 1
-    elif (classifiedInformation == '文书'):
-        deepClassifiedInformation = fineclassifydocument.fineClassifyDocument(imageFile, fineDocumentNum)
+    if classifiedInformation == '证件':
+        deepClassifiedInformation = fineclassifycertificate.fineClassifyCertificate(imageFile)
+        if deepClassifiedInformation:
+            fineCertificateNum = fineCertificateNum + 1
+        if classifiedInformation == '其它':
+            print('文件分类失败，它的路径为' + imagePath)
+            roughNum = roughNum + 1
+    elif classifiedInformation == '文书':
+        deepClassifiedInformation = fineclassifydocument.fineClassifyDocument(imageFile)
         if deepClassifiedInformation:
             fineDocumentNum = fineDocumentNum + 1
-    elif (classifiedInformation == '其他'):
-        print('文件分类失败，它的路径为' + imagePath)
-        roughNum = roughNum + 1
+        if classifiedInformation == '其它':
+            print('文件分类失败，它的路径为' + imagePath)
+            roughNum = roughNum + 1
+    print(fineCertificateNum, fineDocumentNum, roughNum)
+
 
 if __name__ == "__main__":
     filePath = r'/Users/dw8855/Desktop/SaveImage'
@@ -43,5 +47,3 @@ if __name__ == "__main__":
         for image in imageName:
             imagePath = filePath + '/' + fileName + '/' + image
             Main(imagePath)
-
-

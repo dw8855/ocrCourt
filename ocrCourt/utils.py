@@ -53,7 +53,7 @@ def tohisto(imageFile, type):
             for i in range(height):
                 if isBlack(image[i, j]):
                     histo[j] = histo[j] + 1
-    return histo
+    return int(histo)
 
 
 if __name__ == '__main__':
