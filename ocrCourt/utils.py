@@ -2,7 +2,7 @@
 
 import os
 from PIL import Image
-from numpy import *
+import numpy
 import roughclassification
 
 
@@ -12,15 +12,17 @@ def isRed(color):
     else:
         return False
 
+
 def isBlack(color):
     if sum(color) <= 250:
         return True
     else:
         return False
 
+
 def binarition(imageFile, threshold):
     Bimage = imageFile
-    image = array(imageFile)
+    image = numpy.array(imageFile)
     height = len(image)
     width = len(image[0])
     for i in range(width):
@@ -37,21 +39,22 @@ def binarition(imageFile, threshold):
 
 
 def tohisto(imageFile, type):
-    image = array(imageFile)
+    image = numpy.array(imageFile)
     height = len(image)
     width = len(image[0])
-    histo = zeros(height)
+    histo = numpy.zeros(height)
     if type == 'row':
         for i in range(height):
             for j in range(width):
-                if isBlack(image[i, j]) == True:
+                if isBlack(image[i, j]):
                     histo[i] = histo[i] + 1
     elif type == 'col':
-         for j in range(width):
+        for j in range(width):
             for i in range(height):
-                if isBlack(image[i, j]) == True:
+                if isBlack(image[i, j]):
                     histo[j] = histo[j] + 1
-    return  histo
+    return histo
+
 
 if __name__ == '__main__':
     filePath = r'/Users/dw8855/Desktop/SaveImage'

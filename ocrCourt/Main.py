@@ -6,8 +6,6 @@ import getimage
 import roughclassification
 import fineclassifycertificate
 import fineclassifydocument
-import ocrabbyy
-import wordsfilter
 
 
 
@@ -26,10 +24,13 @@ def Main(imagePath):
 #     classifiedInformation = roughclassification.roughClassification(imageFile)
     classifiedInformation = '文书'
     if (classifiedInformation == '证件'):
-        deepClassifiedInformation, fineCertificateNum = fineclassifycertificate.fineClassifyCertificate(imageFile, fineCertificateNum)
+        deepClassifiedInformation = fineclassifycertificate.fineClassifyCertificate(imageFile, fineCertificateNum)
+        if deepClassifiedInformation;
+        fineCertificateNum = fineCertificateNum + 1
     elif (classifiedInformation == '文书'):
-        deepClassifiedInformation, fineDocumentNum = fineclassifydocument.fineClassifyDocument(imageFile, fineDocumentNum)
-        finalClassifiedInformation = wordsfilter.wordsFilter(ocrText)
+        deepClassifiedInformation = fineclassifydocument.fineClassifyDocument(imageFile, fineDocumentNum)
+        if deepClassifiedInformation:
+            fineDocumentNum = fineDocumentNum + 1
     elif (classifiedInformation == '其他'):
         print('文件分类失败，它的路径为' + imagePath)
         roughNum = roughNum + 1
@@ -42,6 +43,5 @@ if __name__ == "__main__":
         for image in imageName:
             imagePath = filePath + '/' + fileName + '/' + image
             Main(imagePath)
-
 
 
