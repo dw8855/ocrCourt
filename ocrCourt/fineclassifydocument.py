@@ -454,9 +454,6 @@ def contentEndCheck(image, row, imageFile):  # 特殊文件的尾部识别
     return '其它'
 
 
-def ocrAbbyy(imageFile):
-    if imageFile:
-        return '123'
 
 
 def fileEndCheck(image, row, threshlod):
