@@ -42,6 +42,7 @@ if __name__ == "__main__":
     filePath = r'/Users/dw8855/Desktop/SaveImage'
     saveImagePath = r'/Users/dw8855/Desktop/SaveImage!'
     file = os.listdir(filePath)[1:]
+    type = 'Tessesract'
     for fileName in file:
         imageName = os.listdir(filePath + '/' + fileName)
         for image in imageName:
